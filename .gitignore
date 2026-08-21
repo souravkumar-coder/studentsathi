@@ -67,3 +67,11 @@ Thumbs.db
 .env
 .env.*
 !.env.example
+# Firebase
+.firebase/
+*.firebase.json
+
+# Environment
+.env
+.env.local
+.env.*.local 
