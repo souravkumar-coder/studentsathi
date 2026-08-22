@@ -6,7 +6,8 @@
     "dev:server": "cross-env NODE_ENV=development tsx watch server/_core/index.ts",
     "dev:metro": "cross-env EXPO_USE_METRO_WORKSPACE_ROOT=1 npx expo start --web --port ${EXPO_PORT:-8081}",
     "db:push": "drizzle-kit generate && drizzle-kit migrate",
-    "check": "tsc --noEmit"
+    "check": "tsc --noEmit",
+    "export": "npx expo export --platform web"
   },
   "dependencies": {
     "@expo/vector-icons": "^15.0.3",
