@@ -158,3 +158,75 @@ body {
 .dark ::-webkit-scrollbar-thumb:hover {
   background: #666;
 }
+/* ===== BOTTOM TAB DARK MODE ===== */
+.dark .tab-bar {
+  background-color: #1e293b !important;
+  border-top-color: #334155 !important;
+}
+
+.dark .tab-bar .tab-item {
+  color: #94a3b8 !important;
+}
+
+.dark .tab-bar .tab-item-active {
+  color: #3b82f6 !important;
+}
+
+/* Active tab indicator */
+.dark .tab-bar .tab-indicator {
+  background-color: #3b82f6 !important;
+}
+
+/* ===== BOTTOM TAB FIX FOR EXPO WEB ===== */
+.dark .tabs-container {
+  background-color: #1e293b !important;
+  border-top-color: #334155 !important;
+}
+
+.dark .tab-button {
+  color: #94a3b8 !important;
+}
+
+.dark .tab-button-active {
+  color: #3b82f6 !important;
+}
+
+.dark .tab-icon {
+  color: #94a3b8 !important;
+}
+
+.dark .tab-icon-active {
+  color: #3b82f6 !important;
+}
+
+/* Bottom navigation bar dark mode */
+.dark [data-rn="true"] .tab-bar {
+  background-color: #1e293b !important;
+  border-top-color: #334155 !important;
+}
+
+/* ===== SCROLLING KEEP ===== */
+html, body {
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+}
+
+#root, #__next, [data-rn] {
+  height: 100% !important;
+  overflow: auto !important;
+}
+
+/* ScrollView fix */
+.scroll-view, .react-native-scroll-view {
+  flex: 1 !important;
+  overflow: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+}
+
+.flex-1 {
+  flex: 1 !important;
+  overflow: auto !important;
+}
