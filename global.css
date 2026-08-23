@@ -1,68 +1,6 @@
 @import "tailwindcss";
 
 /* ===== SCROLLING FIX ===== */
-html, body, #root, #__next {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  overflow: auto;
-}
-
-body {
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
-/* React Native Web scroll fix */
-.react-native-web-view {
-  overflow-y: auto !important;
-  height: 100vh !important;
-}
-
-/* Nice scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
-/* ===== EXPO WEB SCROLL FIX ===== */
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  overflow: auto !important;
-}
-
-body {
-  overflow-y: auto !important;
-  -webkit-overflow-scrolling: touch !important;
-}
-
-#root, #__next, .react-root {
-  height: 100%;
-  overflow: auto !important;
-}
-
-/* Force scroll on all containers */
-[data-rn] {
-  overflow: auto !important;
-}
-
-/* ScrollView fix */
-.scroll-view {
-  flex: 1;
-  overflow: auto !important;
-  -webkit-overflow-scrolling: touch !important;
-}
-/* ===== SCROLLING FINAL FIX ===== */
 html, body {
   height: 100% !important;
   margin: 0 !important;
@@ -76,157 +14,124 @@ html, body {
   overflow: auto !important;
 }
 
-/* Fix for all ScrollViews */
 .scroll-view, .react-native-scroll-view {
   flex: 1 !important;
   overflow: auto !important;
   -webkit-overflow-scrolling: touch !important;
 }
 
-/* Fix for View containers */
 .flex-1 {
   flex: 1 !important;
   overflow: auto !important;
 }
-/* ===== DARK MODE FIX ===== */
-:root {
-  --background: #ffffff;
-  --foreground: #000000;
-}
 
-.dark {
-  --background: #121212;
-  --foreground: #ffffff;
-}
-
-body {
-  background-color: var(--background);
-  color: var(--foreground);
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-/* Dark mode background for all containers */
-.dark #root,
-.dark #__next,
-.dark [data-rn] {
-  background-color: #121212 !important;
-}
-
-/* Dark mode scrollbar */
-.dark ::-webkit-scrollbar-track {
-  background: #1a1a1a;
-}
-.dark ::-webkit-scrollbar-thumb {
-  background: #444;
-}
-/* ===== DARK MODE STYLES ===== */
+/* ===== DARK MODE COMPLETE FIX ===== */
 :root {
   --color-background: #ffffff;
-  --color-foreground: #0f172a;
   --color-surface: #f8fafc;
-  --color-muted: #94a3b8;
+  --color-foreground: #0f172a;
+  --color-muted: #64748b;
   --color-border: #e2e8f0;
+  --color-primary: #2563eb;
+  --color-card: #ffffff;
 }
 
 .dark {
   --color-background: #121212;
-  --color-foreground: #f1f5f9;
   --color-surface: #1e293b;
-  --color-muted: #64748b;
+  --color-foreground: #f1f5f9;
+  --color-muted: #94a3b8;
   --color-border: #334155;
+  --color-primary: #3b82f6;
+  --color-card: #1e293b;
 }
 
+/* ===== BODY & ROOT ===== */
 body {
-  background-color: var(--color-background);
-  color: var(--color-foreground);
+  background-color: var(--color-background) !important;
+  color: var(--color-foreground) !important;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .dark body {
-  background-color: var(--color-background);
-  color: var(--color-foreground);
+  background-color: var(--color-background) !important;
+  color: var(--color-foreground) !important;
 }
 
-/* Dark mode scrollbar */
-.dark ::-webkit-scrollbar-track {
-  background: #1a1a1a;
+/* ===== ALL TEXT ELEMENTS ===== */
+.dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6,
+.dark p, .dark span, .dark div, .dark label, .dark li,
+.dark .text, .dark .title, .dark .heading {
+  color: var(--color-foreground) !important;
 }
-.dark ::-webkit-scrollbar-thumb {
-  background: #444;
-  border-radius: 3px;
+
+.dark .muted, .dark .text-muted, .dark .text-gray, .dark .subtitle {
+  color: var(--color-muted) !important;
 }
-.dark ::-webkit-scrollbar-thumb:hover {
-  background: #666;
+
+/* ===== CARDS & CONTAINERS ===== */
+.dark .card, .dark .container, .dark .box,
+.dark .bg-white, .dark .bg-gray-100, .dark .bg-slate-100 {
+  background-color: var(--color-surface) !important;
+  border-color: var(--color-border) !important;
 }
-/* ===== BOTTOM TAB DARK MODE ===== */
+
+.dark .bg-card, .dark .bg-surface {
+  background-color: var(--color-surface) !important;
+}
+
+/* ===== INPUTS & FORMS ===== */
+.dark input, .dark textarea, .dark select {
+  background-color: #2d3748 !important;
+  color: #f1f5f9 !important;
+  border-color: #4a5568 !important;
+}
+
+.dark input::placeholder, .dark textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+/* ===== BUTTONS ===== */
+.dark .btn-primary {
+  background-color: var(--color-primary) !important;
+  color: #ffffff !important;
+}
+
+.dark .btn-outline {
+  border-color: var(--color-border) !important;
+  color: var(--color-foreground) !important;
+}
+
+/* ===== BOTTOM TAB BAR ===== */
 .dark .tab-bar {
   background-color: #1e293b !important;
   border-top-color: #334155 !important;
 }
 
-.dark .tab-bar .tab-item {
+.dark .tab-item, .dark .tab-icon {
   color: #94a3b8 !important;
 }
 
-.dark .tab-bar .tab-item-active {
+.dark .tab-item-active, .dark .tab-icon-active {
   color: #3b82f6 !important;
 }
 
-/* Active tab indicator */
-.dark .tab-bar .tab-indicator {
-  background-color: #3b82f6 !important;
-}
-
-/* ===== BOTTOM TAB FIX FOR EXPO WEB ===== */
-.dark .tabs-container {
-  background-color: #1e293b !important;
-  border-top-color: #334155 !important;
-}
-
-.dark .tab-button {
+.dark .tab-label {
   color: #94a3b8 !important;
 }
 
-.dark .tab-button-active {
+.dark .tab-label-active {
   color: #3b82f6 !important;
 }
 
-.dark .tab-icon {
-  color: #94a3b8 !important;
+/* ===== SCROLLBAR DARK MODE ===== */
+.dark ::-webkit-scrollbar-track {
+  background: #1a1a1a !important;
 }
-
-.dark .tab-icon-active {
-  color: #3b82f6 !important;
+.dark ::-webkit-scrollbar-thumb {
+  background: #444 !important;
+  border-radius: 3px !important;
 }
-
-/* Bottom navigation bar dark mode */
-.dark [data-rn="true"] .tab-bar {
-  background-color: #1e293b !important;
-  border-top-color: #334155 !important;
-}
-
-/* ===== SCROLLING KEEP ===== */
-html, body {
-  height: 100% !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  overflow: auto !important;
-  -webkit-overflow-scrolling: touch !important;
-}
-
-#root, #__next, [data-rn] {
-  height: 100% !important;
-  overflow: auto !important;
-}
-
-/* ScrollView fix */
-.scroll-view, .react-native-scroll-view {
-  flex: 1 !important;
-  overflow: auto !important;
-  -webkit-overflow-scrolling: touch !important;
-}
-
-.flex-1 {
-  flex: 1 !important;
-  overflow: auto !important;
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #666 !important;
 }

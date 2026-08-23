@@ -1,6 +1,7 @@
 import { Tabs } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import { useThemeContext } from "@/lib/theme-provider";
+import { View, Text, StyleSheet } from "react-native";
 
 export default function TabsLayout() {
   const { colorScheme } = useThemeContext();
@@ -30,7 +31,7 @@ export default function TabsLayout() {
           fontWeight: '500',
         },
         
-        // ✅ Tab icon style (agar icon hai toh)
+        // ✅ Tab icon style
         tabBarIconStyle: {
           marginTop: 2,
         },
@@ -42,41 +43,63 @@ export default function TabsLayout() {
         headerTitleStyle: {
           color: colorScheme === 'dark' ? '#f1f5f9' : '#0f172a',
         },
+        
+        // ✅ Tab bar hide/show
+        tabBarHideOnKeyboard: true,
       }}
     >
       <Tabs.Screen 
         name="index" 
         options={{ 
           title: "Home",
-          tabBarIcon: ({ color }) => <Ionicons name="home" size={24} color={color} />,
+          tabBarIcon: ({ color, focused }) => (
+            <Ionicons name={focused ? "home" : "home-outline"} size={24} color={color} />
+          ),
         }} 
       />
       <Tabs.Screen 
         name="discover" 
         options={{ 
           title: "Discover",
-          tabBarIcon: ({ color }) => <Ionicons name="search" size={24} color={color} />,
+          tabBarIcon: ({ color, focused }) => (
+            <Ionicons name={focused ? "search" : "search-outline"} size={24} color={color} />
+          ),
         }} 
       />
       <Tabs.Screen 
         name="myplan" 
         options={{ 
           title: "My Plan",
-          tabBarIcon: ({ color }) => <Ionicons name="calendar" size={24} color={color} />,
+          tabBarIcon: ({ color, focused }) => (
+            <Ionicons name={focused ? "calendar" : "calendar-outline"} size={24} color={color} />
+          ),
         }} 
       />
       <Tabs.Screen 
         name="updates" 
         options={{ 
           title: "Updates",
-          tabBarIcon: ({ color }) => <Ionicons name="notifications" size={24} color={color} />,
+          tabBarIcon: ({ color, focused }) => (
+            <Ionicons name={focused ? "notifications" : "notifications-outline"} size={24} color={color} />
+          ),
         }} 
       />
       <Tabs.Screen 
         name="profile" 
         options={{ 
           title: "Profile",
-          tabBarIcon: ({ color }) => <Ionicons name="person" size={24} color={color} />,
+          tabBarIcon: ({ color, focused }) => (
+            <Ionicons name={focused ? "person" : "person-outline"} size={24} color={color} />
+          ),
+        }} 
+      />
+      <Tabs.Screen 
+        name="applications" 
+        options={{ 
+          title: "Applications",
+          tabBarIcon: ({ color, focused }) => (
+            <Ionicons name={focused ? "document-text" : "document-text-outline"} size={24} color={color} />
+          ),
         }} 
       />
     </Tabs>
