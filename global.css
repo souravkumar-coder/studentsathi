@@ -1,9 +1,5 @@
-/* Tailwind directives are processed during the build. */
-/* stylelint-disable at-rule-no-unknown */
-/* @tailwind components; */
-@import "tailwindcss/utilities";
+@import "tailwindcss";
 
-/* ===== SCROLLING FIX ONLY ===== */
 html, body {
   height: 100%;
   margin: 0;
@@ -11,7 +7,7 @@ html, body {
   overflow: auto;
 }
 
-#root, #__next, [data-rn] {
+#root {
   height: 100%;
   overflow: auto;
 }
