@@ -1,13 +1,11 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { Appearance, View, useColorScheme as useSystemColorScheme } from "react-native";
 import { colorScheme as nativewindColorScheme, vars } from "nativewind";
-
 import { SchemeColors, type ColorScheme } from "@/constants/theme";
 
 type ThemeContextValue = {
   colorScheme: ColorScheme;
   setColorScheme: (scheme: ColorScheme) => void;
-  toggleTheme: () => void;  // ✅ ADDED
 };
 
 const ThemeContext = createContext<ThemeContextValue | null>(null);
@@ -17,40 +15,16 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [colorScheme, setColorSchemeState] = useState<ColorScheme>(systemScheme);
 
   const applyScheme = useCallback((scheme: ColorScheme) => {
-    // NativeWind
     nativewindColorScheme.set(scheme);
-    
-    // React Native Appearance
-    if (Appearance.setColorScheme) {
-      Appearance.setColorScheme(scheme);
-    }
-    
-    // ✅ WEB: document.documentElement par class aur dataset set karo
+    Appearance.setColorScheme?.(scheme);
     if (typeof document !== "undefined") {
       const root = document.documentElement;
-      
-      // Class toggle for CSS
-      root.classList.remove("light", "dark");
-      root.classList.add(scheme);
-      
-      // Dataset theme
       root.dataset.theme = scheme;
-      
-      // ✅ CSS Variables apply karo
+      root.classList.toggle("dark", scheme === "dark");
       const palette = SchemeColors[scheme];
       Object.entries(palette).forEach(([token, value]) => {
         root.style.setProperty(`--color-${token}`, value);
       });
-      
-      // ✅ Background color set karo body par
-      document.body.style.backgroundColor = palette.background;
-      document.body.style.color = palette.foreground;
-      
-      // ✅ Meta theme color (mobile browsers)
-      const meta = document.querySelector('meta[name="theme-color"]');
-      if (meta) {
-        meta.setAttribute('content', palette.primary);
-      }
     }
   }, []);
 
@@ -59,25 +33,9 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     applyScheme(scheme);
   }, [applyScheme]);
 
-  // ✅ Toggle function
-  const toggleTheme = useCallback(() => {
-    setColorScheme(colorScheme === "light" ? "dark" : "light");
-  }, [colorScheme, setColorScheme]);
-
   useEffect(() => {
     applyScheme(colorScheme);
   }, [applyScheme, colorScheme]);
-
-  // ✅ System theme change listen karo
-  useEffect(() => {
-    const subscription = Appearance.addChangeListener(({ colorScheme: newScheme }) => {
-      if (newScheme) {
-        setColorSchemeState(newScheme);
-        applyScheme(newScheme);
-      }
-    });
-    return () => subscription.remove();
-  }, [applyScheme]);
 
   const themeVariables = useMemo(
     () =>
@@ -99,9 +57,8 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     () => ({
       colorScheme,
       setColorScheme,
-      toggleTheme,  // ✅ ADDED
     }),
-    [colorScheme, setColorScheme, toggleTheme],
+    [colorScheme, setColorScheme],
   );
 
   return (
