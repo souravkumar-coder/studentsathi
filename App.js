@@ -1,9 +1,22 @@
 import { ExpoRoot } from 'expo-router';
+import { View, StyleSheet } from 'react-native';
+import './global.css'; // ✅ Import global styles
 
-// Must be exported or Fast Refresh won't update the context
 export function App() {
   const ctx = require.context('./app');
-  return <ExpoRoot context={ctx} />;
+  return (
+    <View style={styles.container}>
+      <ExpoRoot context={ctx} />
+    </View>
+  );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    height: '100%',
+    overflow: 'auto',
+  },
+});
 
 export default App;

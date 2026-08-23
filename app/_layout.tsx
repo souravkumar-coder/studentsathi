@@ -6,10 +6,11 @@ import * as Notifications from "expo-notifications";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import "react-native-reanimated";
-import { Dimensions, Platform } from "react-native";
+import { Dimensions, Platform, View, StyleSheet } from "react-native"; // ✅ View, StyleSheet ADD KIYE
 import "@/lib/_core/nativewind-pressable";
 import { ThemeProvider } from "@/lib/theme-provider";
 import { StudentSathiProvider } from "@/lib/studentsathi-store";
+
 import {
   SafeAreaFrameContext,
   SafeAreaInsetsContext,
@@ -19,7 +20,6 @@ import {
 import type { EdgeInsets, Metrics, Rect } from "react-native-safe-area-context";
 
 import { trpc, createTRPCClient } from "@/lib/trpc";
-
 
 const DEFAULT_WEB_INSETS: EdgeInsets = { top: 0, right: 0, bottom: 0, left: 0 };
 const DEFAULT_WEB_FRAME: Rect = { x: 0, y: 0, width: 0, height: 0 };
@@ -68,9 +68,7 @@ export default function RootLayout() {
       new QueryClient({
         defaultOptions: {
           queries: {
-            // Disable automatic refetching on window focus for mobile
             refetchOnWindowFocus: false,
-            // Retry failed requests once
             retry: 1,
           },
         },
@@ -91,29 +89,29 @@ export default function RootLayout() {
     };
   }, [initialInsets, initialFrame]);
 
+  // ✅ CONTENT KO VIEW ME WRAP KIYA (SCROLL FIX)
   const content = (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <trpc.Provider client={trpcClient} queryClient={queryClient}>
-        <QueryClientProvider client={queryClient}>
-          <StudentSathiProvider>
-          {/* Default to hiding native headers so raw route segments don't appear (e.g. "(tabs)", "products/[id]"). */}
-          {/* If a screen needs the native header, explicitly enable it and set a human title via Stack.Screen options. */}
-          {/* in order for ios apps tab switching to work properly, use presentation: "fullScreenModal" for login page, whenever you decide to use presentation: "modal*/}
-          <Stack screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="(tabs)" />
-            <Stack.Screen name="oauth/callback" />
-            <Stack.Screen name="onboarding" />
-            <Stack.Screen name="scholarships/[id]" />
-            <Stack.Screen name="eligibility" />
-            <Stack.Screen name="documents" />
-            <Stack.Screen name="assistant" />
-            <Stack.Screen name="community" />
-          </Stack>
-          <StatusBar style="auto" />
-          </StudentSathiProvider>
-        </QueryClientProvider>
-      </trpc.Provider>
-    </GestureHandlerRootView>
+    <View style={styles.container}>  {/* ✅ YEH ADD KIYA */}
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <trpc.Provider client={trpcClient} queryClient={queryClient}>
+          <QueryClientProvider client={queryClient}>
+            <StudentSathiProvider>
+              <Stack screenOptions={{ headerShown: false }}>
+                <Stack.Screen name="(tabs)" />
+                <Stack.Screen name="oauth/callback" />
+                <Stack.Screen name="onboarding" />
+                <Stack.Screen name="scholarships/[id]" />
+                <Stack.Screen name="eligibility" />
+                <Stack.Screen name="documents" />
+                <Stack.Screen name="assistant" />
+                <Stack.Screen name="community" />
+              </Stack>
+              <StatusBar style="auto" />
+            </StudentSathiProvider>
+          </QueryClientProvider>
+        </trpc.Provider>
+      </GestureHandlerRootView>
+    </View>
   );
 
   const shouldOverrideSafeArea = Platform.OS === "web";
@@ -138,7 +136,16 @@ export default function RootLayout() {
     </ThemeProvider>
   );
 }
+
 function subscribeSafeAreaInsets(handleSafeAreaUpdate: (metrics: Metrics) => void): () => void {
   return () => {};
 }
 
+// ✅ STYLES ADD KIYE (END ME)
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    height: '100%',
+    overflow: 'scroll',
+  },
+});
