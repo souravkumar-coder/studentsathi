@@ -1,6 +1,6 @@
 import { ExpoRoot } from 'expo-router';
 import { View, StyleSheet } from 'react-native';
-import './global.css'; // ✅ Import global styles
+import './global.css';
 
 export function App() {
   const ctx = require.context('./app');
@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     height: '100%',
+    minHeight: '100vh',
     overflow: 'auto',
   },
 });
