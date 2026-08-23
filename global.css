@@ -14,17 +14,6 @@ html, body {
   overflow: auto !important;
 }
 
-.scroll-view, .react-native-scroll-view {
-  flex: 1 !important;
-  overflow: auto !important;
-  -webkit-overflow-scrolling: touch !important;
-}
-
-.flex-1 {
-  flex: 1 !important;
-  overflow: auto !important;
-}
-
 /* ===== DARK MODE COMPLETE FIX ===== */
 :root {
   --color-background: #ffffff;
@@ -34,6 +23,7 @@ html, body {
   --color-border: #e2e8f0;
   --color-primary: #2563eb;
   --color-card: #ffffff;
+  --color-heading: #0f172a;
 }
 
 .dark {
@@ -44,6 +34,7 @@ html, body {
   --color-border: #334155;
   --color-primary: #3b82f6;
   --color-card: #1e293b;
+  --color-heading: #ffffff;
 }
 
 /* ===== BODY & ROOT ===== */
@@ -61,27 +52,50 @@ body {
 /* ===== ALL TEXT ELEMENTS ===== */
 .dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6,
 .dark p, .dark span, .dark div, .dark label, .dark li,
-.dark .text, .dark .title, .dark .heading {
+.dark .text, .dark .title, .dark .heading,
+.dark .font-bold, .dark .font-semibold, .dark .font-medium,
+.dark .text-lg, .dark .text-xl, .dark .text-2xl, .dark .text-3xl,
+.dark [class*="text-"] {
   color: var(--color-foreground) !important;
 }
 
-.dark .muted, .dark .text-muted, .dark .text-gray, .dark .subtitle {
+/* ===== PROFILE PAGE SPECIFIC ===== */
+.dark .profile-title,
+.dark .profile-heading,
+.dark .profile-label,
+.dark .profile-text,
+.dark .profile-value,
+.dark .profile-name,
+.dark .profile-email {
+  color: var(--color-foreground) !important;
+}
+
+.dark .profile-subtitle,
+.dark .profile-muted,
+.dark .profile-hint {
   color: var(--color-muted) !important;
 }
 
-/* ===== CARDS & CONTAINERS ===== */
-.dark .card, .dark .container, .dark .box,
-.dark .bg-white, .dark .bg-gray-100, .dark .bg-slate-100 {
+.dark .profile-card,
+.dark .profile-section,
+.dark .profile-container,
+.dark .profile-box {
   background-color: var(--color-surface) !important;
   border-color: var(--color-border) !important;
 }
 
+/* ===== ALL CARDS & CONTAINERS ===== */
+.dark .card, .dark .container, .dark .box,
+.dark .bg-white, .dark .bg-gray-100, .dark .bg-slate-100,
 .dark .bg-card, .dark .bg-surface {
   background-color: var(--color-surface) !important;
+  border-color: var(--color-border) !important;
+  color: var(--color-foreground) !important;
 }
 
 /* ===== INPUTS & FORMS ===== */
-.dark input, .dark textarea, .dark select {
+.dark input, .dark textarea, .dark select,
+.dark .input, .dark .form-control {
   background-color: #2d3748 !important;
   color: #f1f5f9 !important;
   border-color: #4a5568 !important;
@@ -134,4 +148,25 @@ body {
 }
 .dark ::-webkit-scrollbar-thumb:hover {
   background: #666 !important;
+}
+
+/* ===== LIST ITEMS ===== */
+.dark li, .dark .list-item, .dark .menu-item {
+  color: var(--color-foreground) !important;
+}
+
+/* ===== LINKS ===== */
+.dark a, .dark .link {
+  color: var(--color-primary) !important;
+}
+
+/* ===== SEPARATORS ===== */
+.dark hr, .dark .divider {
+  border-color: var(--color-border) !important;
+}
+
+/* ===== BADGES ===== */
+.dark .badge {
+  background-color: var(--color-surface) !important;
+  color: var(--color-foreground) !important;
 }
